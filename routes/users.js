@@ -12,8 +12,9 @@ router.route("/")
     .post(usersController.addUser);
 
 // Matches with "/api/users/:id"
-/* router
+router
 .route("/:id")
-.get(usersController.getUser);  */
+.get(usersController.getUser)
+.put(usersController.updateUser);
 
 module.exports = router;
