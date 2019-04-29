@@ -1,0 +1,2 @@
+
+db.people.insert({"firstName": "John", "lastName":"Doe", "email":"jd@gmail.com" , "phone":"123456566","city":"San Francisco", "state":"CA","password":"123456", "rating":0, "items": [], "wishlist":[]})
