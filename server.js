@@ -2,16 +2,26 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
+const userRoutes = require("./routes/users.js");
+const categoriesRoutes = require("./routes/categories");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cors());
-app.use(routes);
+//app.use(routes);
+
+/* app.get('/',function(req, res) {
+  res.send("Hello from the root route");
+}); */
+
+app.use('/api/users', userRoutes);
+
+app.use('/api/categories', categoriesRoutes);
 
 mongoose.set("debug", true);
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/trading-post");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tradingpost", { useNewUrlParser: true });
 
 app.listen(PORT, function () {
     console.log(`API server listening on port ${PORT}`);

@@ -3,10 +3,19 @@ const Schema = mongoose.Schema;
 
 var itemSchema = Schema({
   _owner: { type: Schema.Types.ObjectId, ref: 'Person' },
-  title: String,
+  title: {
+    type: String,
+    trim: true
+  },
   picture: String,
-  description: String,
-  condition: String,
+  description: {
+    type: String,
+    trim: true
+  },
+  condition: {
+    type: String,
+    trim: true
+  },
   category: { type: Schema.Types.ObjectId, ref: 'Category' }
 });
 
