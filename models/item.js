@@ -16,6 +16,10 @@ var itemSchema = Schema({
     type: String,
     trim: true
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   category: { type: Schema.Types.ObjectId, ref: 'Category' }
 });
 
