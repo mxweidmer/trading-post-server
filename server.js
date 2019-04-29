@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const userRoutes = require("./routes/users.js");
 const categoriesRoutes = require("./routes/categories");
+const itemRoutes = require("./routes/items");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,10 +21,12 @@ app.use('/api/users', userRoutes);
 
 app.use('/api/categories', categoriesRoutes);
 
+app.use('/api/items', itemRoutes);
+
 mongoose.set("debug", true);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tradingpost", { useNewUrlParser: true });
 
 app.listen(PORT, function () {
-    console.log(`API server listening on port ${PORT}`);
+  console.log(`API server listening on port ${PORT}`);
 });
 

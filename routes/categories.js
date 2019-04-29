@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const usersController = require("../controllers/usersController");
+const categoryController = require("../controllers/categoriesController");
 
-router.get('/',function(req, res) {
-    res.send("Hello from the categories routes");
-  });
+router.route("/")
+  .get(categoryController.getCategories)
+  .post(categoryController.addCategory);
+
+router.route("/:category")
+  .get(categoryController.getCategory);
 
 module.exports = router;
