@@ -28,8 +28,8 @@ const personSchema = Schema({
     },
     password: String,
     rating: Number,
-    items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
-    wishlist: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
+    items: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
+    /* ,wishlist: [{ type: Schema.Types.ObjectId, ref: 'Item' }] */
 });
 
 var Person = mongoose.model('Person', personSchema);

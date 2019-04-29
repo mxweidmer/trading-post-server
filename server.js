@@ -23,6 +23,8 @@ app.use('/api/categories', categoriesRoutes);
 
 app.use('/api/items', itemRoutes);
 
+
+
 mongoose.set("debug", true);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tradingpost", { useNewUrlParser: true });
 

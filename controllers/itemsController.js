@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the booksController
+// Defining methods for the itemsController
 module.exports = {
     //get method to retrieve all items and sort them
     getAllItems: function (req, res) {
