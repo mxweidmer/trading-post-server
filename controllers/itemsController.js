@@ -31,5 +31,8 @@ module.exports = {
                 console.log(err);
                 res.status(422).json(err);
             });
+    },
+    updateItem: function (req, res) {
+        db.Item.findOneAndUpdate({ _id: req.params.itemId }, { $set: { title: "Some22341234" } }).then(() => console.log("yay"))
     }
 };

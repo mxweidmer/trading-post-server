@@ -5,7 +5,7 @@ const itemController = require("../controllers/itemsController");
 router.route("/:sortMethod")
     .get(itemController.getAllItems)
 router.route("/:itemId")
-// .put(itemController.updateItem)
+    .put(itemController.updateItem)
 // .delete(itemController.deleteItem);
 router.route("/:userId")
     .post(itemController.addItem);
