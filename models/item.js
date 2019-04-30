@@ -6,30 +6,28 @@ var itemSchema = Schema({
   title: {
     type: String,
     trim: true,
-    default: undefined
+    default: ""
   },
   picture: {
     type: String,
-    default: undefined
+    default: ""
   },
   description: {
     type: String,
     trim: true,
-    default: undefined
+    default: ""
   },
   condition: {
     type: String,
     trim: true,
-    default: undefined
+    default: ""
   },
   createdAt: {
     type: Date,
     default: Date.now
   },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category'
-  }
+  category: {type: String, enum: ['General','Books', 'Electronics', 'Jewerly', 'Tools', 'Clothing','Furniture', 'Games','Sports Equipment', 'Appliances'] }
+
 });
 
 var Item = mongoose.model('Item', itemSchema);
