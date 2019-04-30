@@ -25,7 +25,7 @@ module.exports = {
     },
     addCategory: function (req, res) {
         db.Category
-            .create({ name: "Test" })
+            .create({ name: "Books" })
             .then(dbModel => {
                 console.log(dbModel);
                 res.status(201).json(dbModel);

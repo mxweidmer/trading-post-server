@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the booksController
+// Defining methods for the usersController
 module.exports = {
   //get method to retrieve all users - for testing only, remove before deploying
   findUsers: function (req, res) {
@@ -23,6 +23,7 @@ module.exports = {
       });
     //.catch(err => res.send(err));
   },
+  //this method to find a user based on the users id and update her/his info
   updateUser: function (req, res) {
     //return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
 
@@ -37,8 +38,8 @@ module.exports = {
       )
       .catch(err => res.status(422).json(err));
   },
+  //the method to get a user's info based on his/her id
   getUser: function (req, res) {
-    //return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
 
     db.Person.findOne({ _id: req.params.id })
       .populate('items')
