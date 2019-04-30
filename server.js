@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 const userRoutes = require("./routes/users.js");
 const categoriesRoutes = require("./routes/categories");
 const itemRoutes = require("./routes/items");
+const wishlistRoutes = require("./routes/wishlist");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,6 +23,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/categories', categoriesRoutes);
 
 app.use('/api/items', itemRoutes);
+
+app.use('/api/wishlist', wishlistRoutes);
 
 
 
