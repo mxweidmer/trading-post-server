@@ -21,9 +21,6 @@ module.exports = {
         db.Item
             .create(req.body)
             .then(dbModel => {
-
-                db.Category.findOneAndUpdate({ _id: dbModel.category }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
-
                 db.Person.findOneAndUpdate({ _id: req.params.userId }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
 
                 res.status(201).json(dbModel);

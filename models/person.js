@@ -26,6 +26,9 @@ const personSchema = Schema({
         type: String,
         trim: true
     },
+    awsid: {
+        type: String
+    },
     password: String,
     rating: Number,
     items: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
