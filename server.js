@@ -20,7 +20,7 @@ app.use(cors());
 
 app.use('/api/users', userRoutes);
 
-app.use('/api/categories', categoriesRoutes);
+// app.use('/api/categories', categoriesRoutes);
 
 app.use('/api/items', itemRoutes);
 
