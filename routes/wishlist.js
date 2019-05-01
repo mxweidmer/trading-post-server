@@ -4,9 +4,9 @@ const wishlistController = require("../controllers/wishlistController");
 
 
 // Matches with "/api/wishlist/:id" where id is users id
-router.route("/:id")
-    .get(wishlistController.findWishlistItems)
-    .post(wishlistController.addWishlistItem);
+router.route("/:userId/:itemId")
+    // .get(wishlistController.findWishlistItems)
+    .put(wishlistController.addWishlistItemUser);
 
 //wishitem should be deleted from the wishlist when it is deleted from the items (in the items controller)
 
