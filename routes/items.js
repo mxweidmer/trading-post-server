@@ -7,7 +7,8 @@ router.route("/:sortMethod")
 router.route("/:itemId")
     .put(itemController.updateItem)
 // .delete(itemController.deleteItem);
-router.route("/:userId")
-    .post(itemController.addItem);
+router.route("/:userId/:itemId")
+    .post(itemController.addItem)
+    .delete(itemController.deleteItem)
 
 module.exports = router;

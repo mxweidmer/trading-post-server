@@ -31,12 +31,22 @@ module.exports = {
             });
     },
     deleteItem: function (req, res) {
+        db.Person
+            .findOneAndUpdate({ _id: req.params.userId }, { $pull: { items: req.params.itemId } })
+            .then(dbModel => {
+                console.log("The item was deleted from the wishlist of " + dbModel.name);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(422).json(err);
+            });
+
         db.Item.remove({ _id: req.params.itemId }).then(() => console.log("Item deleted"))
     },
     updateItem: function (req, res) {
         db.Item.findOneAndUpdate({ _id: req.params.itemId }, { $set: req.body }).then(() => console.log("yay"))
     },
     getSingleItem: function (req, res) {
-        db.Item.findById({ _id: req.params.id }).then(() => console.log("maybe"))
+        db.Item.findById({ _id: req.params.id }).then(dbModel => res.json(dbModel))
     }
 };

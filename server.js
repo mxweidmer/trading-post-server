@@ -26,8 +26,6 @@ app.use('/api/items', itemRoutes);
 
 app.use('/api/wishlist', wishlistRoutes);
 
-
-
 mongoose.set("debug", true);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tradingpost", { useNewUrlParser: true });
 
