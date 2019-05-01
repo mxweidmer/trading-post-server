@@ -47,6 +47,6 @@ module.exports = {
         db.Item.findOneAndUpdate({ _id: req.params.itemId }, { $set: req.body }).then(() => console.log("yay"))
     },
     getSingleItem: function (req, res) {
-        db.Item.findById({ _id: req.params.id }).then(dbModel => res.json(dbModel))
+        db.Item.findById({ _id: req.params.itemId }).then(dbModel => res.json(dbModel))
     }
 };

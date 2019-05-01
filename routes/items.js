@@ -6,6 +6,7 @@ router.route("/:sortMethod")
     .get(itemController.getAllItems)
 router.route("/:itemId")
     .put(itemController.updateItem)
+    .get(itemController.getSingleItem)
 // .delete(itemController.deleteItem);
 router.route("/:userId/:itemId")
     .post(itemController.addItem)
