@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the booksController
+// Defining methods for the itemsController
 module.exports = {
     //get method to retrieve all items and sort them
     getAllItems: function (req, res) {
@@ -21,9 +21,6 @@ module.exports = {
         db.Item
             .create(req.body)
             .then(dbModel => {
-
-                db.Category.findOneAndUpdate({ _id: dbModel.category }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
-
                 db.Person.findOneAndUpdate({ _id: req.params.userId }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
 
                 res.status(201).json(dbModel);
@@ -38,5 +35,8 @@ module.exports = {
     },
     updateItem: function (req, res) {
         db.Item.findOneAndUpdate({ _id: req.params.itemId }, { $set: req.body }).then(() => console.log("yay"))
+    },
+    getSingleItem: function (req, res) {
+        db.Item.findById({ _id: req.params.id }).then(() => console.log("maybe"))
     }
 };

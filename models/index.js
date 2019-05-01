@@ -2,5 +2,6 @@
 module.exports = {
     Item: require("./item"),
     Person: require("./person"),
-    Category: require("./category")
+    //Category: require("./category"),
+    Wishlist: require("./wishlist")
 };

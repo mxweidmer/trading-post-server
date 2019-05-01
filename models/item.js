@@ -2,35 +2,35 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var itemSchema = Schema({
-  _owner: { type: Schema.Types.ObjectId, ref: 'Person' },
+  _owner: { type: Schema.Types.ObjectId, ref: 'Person', required: true },
   title: {
     type: String,
     trim: true,
-    default: undefined
+    default: "",
+    required: true
   },
   picture: {
     type: String,
-    default: undefined
+    default: "",
+    required: true
   },
   description: {
     type: String,
     trim: true,
-    default: undefined
+    default: ""
   },
   condition: {
     type: String,
     trim: true,
-    default: undefined
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+    default: "",
+    required: true
   },
   category: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category'
+    type: String,
+    enum: ['General', 'Books', 'Electronics', 'Jewerly', 'Tools', 'Clothing', 'Furniture', 'Games', 'Sports Equipment', 'Appliances'],
+    default: 'General'
   }
-});
+}, { timestamps: true });
 
 var Item = mongoose.model('Item', itemSchema);
 
