@@ -43,6 +43,7 @@ module.exports = {
 
     db.Person.findOne({ _id: req.params.id })
       .populate('items')
+      .populate('wishlist')
       .then(dbModel => {
         console.log(dbModel);
         res.status(201).json(dbModel)
