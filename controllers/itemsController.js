@@ -16,7 +16,7 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
-    //the method to add an item
+    //the method to add an item to the collection of items and add the corresponding item to the items of the specified user
     addItem: function (req, res) {
         db.Item
             .create(req.body)
@@ -30,9 +30,11 @@ module.exports = {
                 res.status(422).json(err);
             });
     },
+    //the method to delete an item based on its id
     deleteItem: function (req, res) {
         db.Item.remove({ _id: req.params.itemId }).then(() => console.log("Item deleted"))
     },
+    //the method to update an item based on its id
     updateItem: function (req, res) {
         db.Item.findOneAndUpdate({ _id: req.params.itemId }, { $set: req.body }).then(() => console.log("yay"))
     }

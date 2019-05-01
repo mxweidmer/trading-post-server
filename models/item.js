@@ -22,13 +22,15 @@ var itemSchema = Schema({
     trim: true,
     default: ""
   },
-  createdAt: {
+ /*  createdAt: {
     type: Date,
     default: Date.now
-  },
-  category: {type: String, enum: ['General','Books', 'Electronics', 'Jewerly', 'Tools', 'Clothing','Furniture', 'Games','Sports Equipment', 'Appliances'] }
+  }, */
+  category: {type: String, enum: ['General','Books', 'Electronics', 'Jewelry', 'Tools', 'Clothing','Furniture', 'Games','Sports Equipment', 'Appliances'] }
 
-});
+},
+{ timestamps: true}
+);
 
 var Item = mongoose.model('Item', itemSchema);
 

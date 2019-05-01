@@ -33,7 +33,9 @@ const personSchema = Schema({
     rating: Number,
     items: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
     /* ,wishlist: [{ type: Schema.Types.ObjectId, ref: 'Item' }] */
-});
+},
+{ timestamps: true}
+);
 
 var Person = mongoose.model('Person', personSchema);
 
