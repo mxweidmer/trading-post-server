@@ -27,7 +27,7 @@ var itemSchema = Schema({
   },
   category: {
     type: String,
-    enum: ['General', 'Books', 'Electronics', 'Jewerly', 'Tools', 'Clothing', 'Furniture', 'Games', 'Sports Equipment', 'Appliances'],
+    enum: ['General', 'Books', 'Electronics', 'Jewelry', 'Tools', 'Clothing', 'Furniture', 'Games', 'Sports Equipment', 'Appliances'],
     default: 'General'
   }
 }, { timestamps: true });
