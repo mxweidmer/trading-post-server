@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const userRoutes = require("./routes/users.js");
-//const categoriesRoutes = require("./routes/categories");
+const categoriesRoutes = require("./routes/categories");
 const itemRoutes = require("./routes/items");
 const wishlistRoutes = require("./routes/wishlist");
 
