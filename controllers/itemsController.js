@@ -12,6 +12,7 @@ module.exports = {
         }
         db.Item
             .find({})
+            .limit(12)
             .sort({ createdAt: sort })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
