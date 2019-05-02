@@ -9,7 +9,9 @@ router.route("/:itemId")
     .get(itemController.getSingleItem)
 // .delete(itemController.deleteItem);
 router.route("/:userId/:itemId")
-    .post(itemController.addItem)
     .delete(itemController.deleteItem)
 
+router.route("/:userId")
+    .post(itemController.addItem)
+    
 module.exports = router;
