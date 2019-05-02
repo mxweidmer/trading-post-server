@@ -18,7 +18,7 @@ module.exports = {
     categorySearch: function (req, res) {
         db.Item
             .find(
-                { $text: { $search: req.params.searchTerm + '"' + category + '"' } },
+                { $text: { $search: req.params.searchTerm + '"' + req.params.category + '"' } },
                 { score: { $meta: "textScore" } }
             )
             .sort({ score: { $meta: 'textScore' } })
