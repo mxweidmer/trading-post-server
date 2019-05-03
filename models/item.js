@@ -32,6 +32,8 @@ var itemSchema = Schema({
   }
 }, { timestamps: true });
 
+itemSchema.index({title: 'text', category: 'text'});
+
 var Item = mongoose.model('Item', itemSchema);
 
 module.exports = Item;
