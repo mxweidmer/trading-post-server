@@ -34,6 +34,7 @@ module.exports = {
 
             db.Item
                 .create({
+                    _owner: req.body._owner,
                     title: req.body.title,
                     picture: req.body.picture,
                     description: req.body.description,
