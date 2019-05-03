@@ -19,17 +19,38 @@ module.exports = {
     },
     //the method to add an item
     addItem: function (req, res) {
-        db.Item
-            .create(req.body)
-            .then(dbModel => {
-                db.Person.findOneAndUpdate({ _id: req.params.userId }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
 
-                res.status(201).json(dbModel);
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(422).json(err);
-            });
+        axios.post("https://api.imgur.com/3/upload", {
+            datatype: "json",
+            headers: {
+                "Authorization": "Client-ID 8bc6ab7f6927702"
+            },
+            data: req.body.picture,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).then(imgur => {
+
+            db.Item
+                .create({
+                    title: req.body.title,
+                    picture: imgur.data.link,
+                    description: req.body.description,
+                    category: req.body.category,
+                    condition: req.body.condition
+                })
+                .then(dbModel => {
+                    db.Person.findOneAndUpdate({ _id: req.params.userId }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
+
+                    res.status(201).json(dbModel);
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(422).json(err);
+                });
+        })
+
+
     },
     deleteItem: function (req, res) {
         db.Person
