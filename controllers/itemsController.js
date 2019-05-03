@@ -36,7 +36,7 @@ module.exports = {
                 .create({
                     _owner: req.body._owner,
                     title: req.body.title,
-                    picture: req.body.picture,
+                    picture: imgur.data.link,
                     description: req.body.description,
                     category: req.body.category,
                     condition: req.body.condition
