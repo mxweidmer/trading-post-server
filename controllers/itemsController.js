@@ -21,21 +21,21 @@ module.exports = {
     //the method to add an item
     addItem: function (req, res) {
 
-        axios.post("https://api.imgur.com/3/upload", {
-            datatype: "json",
-            headers: {
-                "Authorization": "Client-ID 8bc6ab7f6927702"
-            },
-            data: req.body.picture,
-            cache: false,
-            contentType: false,
-            processData: false
-        }).then(imgur => {
+        // axios.post("https://api.imgur.com/3/upload", {
+        //     datatype: "json",
+        //     headers: {
+        //         "Authorization": "Client-ID 8bc6ab7f6927702"
+        //     },
+        //     data: req.body.picture,
+        //     cache: false,
+        //     contentType: false,
+        //     processData: false
+        // }).then(imgur => {
 
             db.Item
                 .create({
                     title: req.body.title,
-                    picture: imgur.data.link,
+                    picture: req.body.picture,
                     description: req.body.description,
                     category: req.body.category,
                     condition: req.body.condition
@@ -49,7 +49,7 @@ module.exports = {
                     console.log(err);
                     res.status(422).json(err);
                 });
-        })
+        // })
 
 
     },
