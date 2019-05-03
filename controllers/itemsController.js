@@ -50,6 +50,8 @@ module.exports = {
                     console.log(err);
                     res.status(422).json(err);
                 });
+        }).catch(error => {
+            console.log(error);
         })
 
 
