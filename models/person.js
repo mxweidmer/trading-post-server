@@ -27,6 +27,11 @@ const personSchema = Schema({
         trim: true,
         default: ""
     },
+    profilePic: {
+        type: String,
+        trim: true,
+        default: "https://via.placeholder.com/150"
+    },
     city: {
         type: String,
         trim: true,
