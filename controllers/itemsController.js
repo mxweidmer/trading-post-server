@@ -22,7 +22,7 @@ module.exports = {
     addItem: function (req, res) {
 
         axios.post("https://api.imgur.com/3/upload", {
-            datatype: "json",
+            datatype: "multipart/form-data",
             headers: {
                 "Authorization": "Client-ID 8bc6ab7f6927702"
             },
