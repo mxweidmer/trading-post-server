@@ -53,6 +53,15 @@ app.use(passport.initialize());
 // Persistent login sessions. Session expires after 6 months or when deleted by user.
 app.use(passport.session());
 
+// enable CORS so that browsers don't block requests.
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://localhost:5000'); // eventually change to heroku url - may need to be localhost:3000
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
+
 app.use('/api/users', userRoutes);
 
 app.use('/api/categories', categoriesRoutes);
@@ -62,6 +71,8 @@ app.use('/api/items', itemRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 
 app.use('/api/auth', authRoutes);
+
+
 
 
 
