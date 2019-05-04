@@ -12,11 +12,11 @@ router.get("/user", (req, res) => {
    if (req.isAuthenticated()) {
       const currentUser = req.session.passport.user;
       console.log("Current user: ", currentUser);
-      db.User.findOne({ _id: currentUser })
+      db.Person.findOne({ _id: currentUser })
          .then(dbUser => {
             const user = {
                loggedIn: true,
-               username: dbUser.username
+               userName: dbUser.userName
             }
             console.log("Logged in user: ", user)
             res.json(user);
@@ -25,7 +25,7 @@ router.get("/user", (req, res) => {
    } else {
       const noUser = {
          loggedIn: false,
-         username: ""
+         userName: ""
       }
       res.json(noUser);
    }
@@ -54,7 +54,7 @@ router.post("/signup", (req, res, next) => {
             return next(err);
          }
 
-         res.cookie("username", req.user.username);
+         res.cookie("userName", req.user.userName);
         // res.cookie("user_id", req.user.id);
          return res.redirect("/");
       });
@@ -86,9 +86,9 @@ router.post("/login", (req, res, next) => {
             return next(err);
          }
 
-         res.cookie("username", user.username);
+         res.cookie("userName", user.userName);
          //res.cookie("user_id", user._id);
-         var userI = { username: user.username }
+         var userI = { userName: user.userName }
          return res.json(userI);
       })
 
@@ -106,7 +106,7 @@ router.get("/logout", function (req, res) {
        console.log("Error: ", err);
      }
      res.clearCookie("user_id");
-     res.clearCookie("username");
+     res.clearCookie("userName");
      res.clearCookie("connect.sid");
      res.redirect("/");
    });
