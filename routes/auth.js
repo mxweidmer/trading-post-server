@@ -8,6 +8,8 @@ const db = require("../models");
 // =========================================================
 
 router.get("/user", (req, res) => {
+   console.log(req.user, 'req.user');
+   console.log('isAuthenticated', req.isAuthenticated());
 
    if (req.isAuthenticated()) {
       const currentUser = req.session.passport.user;
@@ -27,6 +29,7 @@ router.get("/user", (req, res) => {
          loggedIn: false,
          userName: ""
       }
+      console.log(noUser)
       res.json(noUser);
    }
 });
@@ -55,8 +58,10 @@ router.post("/signup", (req, res, next) => {
          }
 
          res.cookie("userName", req.user.userName);
-        // res.cookie("user_id", req.user.id);
-         return res.redirect("/");
+         res.cookie("user_id", user._id);
+         console.log(req.session.passport, 'req.session.passport');
+         console.log(req.session.passport.user, 'req.session.passport.user');
+         res.json({message: "Success!", user});
       });
 
    })(req, res, next);
@@ -87,8 +92,8 @@ router.post("/login", (req, res, next) => {
          }
 
          res.cookie("userName", user.userName);
-         //res.cookie("user_id", user._id);
-         var userI = { userName: user.userName }
+         res.cookie("user_id", user._id);
+         var userI = { userName: user.userName, user_id: user._id }
          return res.json(userI);
       })
 
@@ -105,10 +110,10 @@ router.get("/logout", function (req, res) {
      if (err) {
        console.log("Error: ", err);
      }
-     res.clearCookie("user_id");
      res.clearCookie("userName");
      res.clearCookie("connect.sid");
-     res.redirect("/");
+     //res.redirect("/");
+     res.json({message: "Success!"});
    });
 
  });

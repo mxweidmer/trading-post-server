@@ -9,11 +9,14 @@ module.exports = () => {
    // ========================================
 
    passport.serializeUser((user, cb) => {
+      console.log('serializeUser!!!!!!!!!!!! ------------------------\n\n\n')
+      console.log({user})
       cb(null, user.id);
    });
 
    passport.deserializeUser((id, cb) => {
-
+      console.log('deserializeUser!!!!!!!!!!!! ------------------------\n\n\n')
+      console.log({id})
       db.Person.findById(id, (err, user) => {
          if (err) { return cb(err); }
          cb(null, user);
