@@ -6,7 +6,7 @@ const db = require("../models");
 
 // Route to check if user is signed in (using session)
 // =========================================================
-
+/*
 router.get("/user", (req, res) => {
    console.log(req.user, 'req.user');
    console.log('isAuthenticated', req.isAuthenticated());
@@ -34,7 +34,7 @@ router.get("/user", (req, res) => {
    }
 });
 
-
+*/
 // Route to authenticate user sign up
 // =========================================================
 
@@ -46,6 +46,7 @@ router.post("/signup", (req, res, next) => {
          return next(err);
       }
 
+      // if not user true than user not exist else again enter login information
       if (!user) {
          console.log("Not a user.")
          return res.send("Please re-enter your username and password.");
@@ -84,6 +85,7 @@ router.post("/login", (req, res, next) => {
          return res.send("Please re-enter your username and password.");
       }
 
+      // after successfull password compared than User 
       req.login(user, (err) => {
          
          if (err) {
@@ -93,7 +95,10 @@ router.post("/login", (req, res, next) => {
 
          res.cookie("userName", user.userName);
          res.cookie("user_id", user._id);
+        
+         // Username and userId saved in userI
          var userI = { userName: user.userName, user_id: user._id }
+         // sending response to client (local storage)
          return res.json(userI);
       })
 

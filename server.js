@@ -79,8 +79,6 @@ app.use('/api/wishlist', wishlistRoutes);
 
 app.use('/api/auth', authRoutes);
 
-
-
 app.listen(PORT, function () {
   console.log(`API server listening on port ${PORT}`);
 });

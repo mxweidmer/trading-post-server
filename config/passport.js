@@ -35,18 +35,23 @@ module.exports = () => {
    },
       (req, userName, password, done) => {
 console.log("usernam: "+ userName)
+         // find username from models 
          db.Person.findOne({ userName: userName }, (err, user) => {
             if (err) {
                console.log("Error: ", err);
                return done(err);
             }
 
+            // checking user exist or not
             if (user !== null) {
                console.log("Username is already taken.", user);
                return done(null, false, { message: "Username is already taken." });
             }
 
+            // genrate hash password
             const hashedPassword = generateHash(req.body.password);
+
+            // New user information from client side            
             const newUser = {
                firstName: req.body.firstName,
                lastName: req.body.firstName,
@@ -58,6 +63,8 @@ console.log("usernam: "+ userName)
                state: req.body.state,
                
             }
+
+            // creating new user from client data, if successfull than return new user to (passpor.authentication)
             db.Person.create(newUser)
                .then(function (dbUser) {
                   if (!dbUser) {
@@ -87,14 +94,14 @@ console.log("usernam: "+ userName)
                console.log("Error: ", err);
                return done(err);
             }
-            
+           // Checking user exist or not 
             if (!user) {
                console.log("No user found.", user);
                return done(null, false, {
                   message: "No user found."
                });
             }
-
+            // Comparing bcrypt password with save password(Database) 
             if (!bCrypt.compareSync(password, user.password)) {
                console.log("Invalid password.");
                return done(null, false, {
@@ -102,6 +109,7 @@ console.log("usernam: "+ userName)
                });
             }
 
+            // if successfull than user return to (req.login:auth.js) 
             console.log("Success!", user);
             return done(null, user);
          });
