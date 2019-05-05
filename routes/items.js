@@ -6,12 +6,15 @@ router.route("/:sortMethod")
     .get(itemController.getAllItems)
 router.route("/:itemId")
     .put(itemController.updateItem)
-    .get(itemController.getSingleItem)
+
 // .delete(itemController.deleteItem);
 router.route("/:userId/:itemId")
     .delete(itemController.deleteItem)
 
 router.route("/:userId")
     .post(itemController.addItem)
-    
+
+router.route("/single/:itemId")
+    .get(itemController.getSingleItem)
+
 module.exports = router;
