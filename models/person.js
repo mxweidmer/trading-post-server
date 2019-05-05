@@ -15,12 +15,15 @@ const personSchema = Schema({
     userName: {
         type: String,
         trim: true,
-        required: true
+        required: "Username is required.",
+    unique: true
     },
     email: {
         type: String,
+        trim: true,
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
-        required: "Email cannot be blank"
+        required: "Email cannot be blank",
+        unique: false
     },
     phone: {
         type: String,
@@ -42,13 +45,21 @@ const personSchema = Schema({
         trim: true,
         required: true
     },
-    awsid: {
-        type: String
-    },
-    password: String,
-    rating: {
-        default: 0
-    },
+    password: {
+        type: String,
+        trim: true,
+        required: "Password is required.",
+        validate: [
+          function (input) {
+            return input.length >= 6;
+          },
+          "Password should be at least 6 characters long."
+        ]
+      },
+      bio: {
+          type: String,
+          trim: true,
+      },
     items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
     wishlist: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
 }, { timestamps: true });
