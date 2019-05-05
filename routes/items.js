@@ -4,8 +4,7 @@ const itemController = require("../controllers/itemsController");
 
 router.route("/:sortMethod")
     .get(itemController.getAllItems)
-    
-// .delete(itemController.deleteItem);
+
 router.route("/:userId/:itemId")
     .delete(itemController.deleteItem)
 

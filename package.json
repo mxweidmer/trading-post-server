@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mxweidmer/trading-post-server#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "mongoose": "^5.4.16",
