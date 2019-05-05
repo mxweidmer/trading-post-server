@@ -35,7 +35,7 @@ module.exports = {
         db.Person
             .findOneAndUpdate({ _id: req.params.userId }, { $pull: { items: req.params.itemId } })
             .then(dbModel => {
-                console.log("The item was deleted from the wishlist of " + dbModel.name);
+                console.log("The item was deleted from the items of " + dbModel.name);
             })
             .catch(err => {
                 console.log(err);
@@ -45,7 +45,16 @@ module.exports = {
         db.Item.remove({ _id: req.params.itemId }).then(() => console.log("Item deleted"))
     },
     updateItem: function (req, res) {
-        db.Item.findOneAndUpdate({ _id: req.params.itemId }, { $set: req.body }).then(() => console.log("yay"))
+        db.Item.findOneAndUpdate({ _id: req.params.itemId },
+            {
+                $set: {
+                    title: req.body.title,
+                    picture: req.body.picture,
+                    description: req.body.description,
+                    condition: req.body.condition
+                }
+            })
+            .then(() => console.log("yay"))
     },
     getSingleItem: function (req, res) {
         db.Item.findById({ _id: req.params.itemId }).then(dbModel => res.json(dbModel))

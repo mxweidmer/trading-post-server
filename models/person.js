@@ -56,9 +56,9 @@ const personSchema = Schema({
           "Password should be at least 6 characters long."
         ]
       },
-      userCreated: {
-        type: Date,
-        default: Date.now
+      bio: {
+          type: String,
+          trim: true,
       },
     items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
     wishlist: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
