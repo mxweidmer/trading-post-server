@@ -8,15 +8,17 @@ const db = require("../models");
 // =========================================================
 
 router.get("/user", (req, res) => {
+   console.log(req.user, 'req.user');
+   console.log('isAuthenticated', req.isAuthenticated());
 
    if (req.isAuthenticated()) {
       const currentUser = req.session.passport.user;
       console.log("Current user: ", currentUser);
-      db.User.findOne({ _id: currentUser })
+      db.Person.findOne({ _id: currentUser })
          .then(dbUser => {
             const user = {
                loggedIn: true,
-               username: dbUser.username
+               userName: dbUser.userName
             }
             console.log("Logged in user: ", user)
             res.json(user);
@@ -25,8 +27,9 @@ router.get("/user", (req, res) => {
    } else {
       const noUser = {
          loggedIn: false,
-         username: ""
+         userName: ""
       }
+      console.log(noUser)
       res.json(noUser);
    }
 });
@@ -54,9 +57,11 @@ router.post("/signup", (req, res, next) => {
             return next(err);
          }
 
-         res.cookie("username", req.user.username);
-        // res.cookie("user_id", req.user.id);
-         return res.redirect("/");
+         res.cookie("userName", req.user.userName);
+         res.cookie("user_id", user._id);
+         console.log(req.session.passport, 'req.session.passport');
+         console.log(req.session.passport.user, 'req.session.passport.user');
+         res.json({message: "Success!", user});
       });
 
    })(req, res, next);
@@ -86,9 +91,9 @@ router.post("/login", (req, res, next) => {
             return next(err);
          }
 
-         res.cookie("username", user.username);
-         //res.cookie("user_id", user._id);
-         var userI = { username: user.username }
+         res.cookie("userName", user.userName);
+         res.cookie("user_id", user._id);
+         var userI = { userName: user.userName, user_id: user._id }
          return res.json(userI);
       })
 
@@ -105,10 +110,10 @@ router.get("/logout", function (req, res) {
      if (err) {
        console.log("Error: ", err);
      }
-     res.clearCookie("user_id");
-     res.clearCookie("username");
+     res.clearCookie("userName");
      res.clearCookie("connect.sid");
-     res.redirect("/");
+     //res.redirect("/");
+     res.json({message: "Success!"});
    });
 
  });

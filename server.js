@@ -26,6 +26,10 @@ app.use(cors());
   res.send("Hello from the root route");
 }); */
 
+// Configure body parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // Connect to Mongoose
 mongoose.Promise = Promise;
 mongoose.set("debug", true);
@@ -37,13 +41,16 @@ app.use(flash());
 require('./config/passport')(passport);
 
 // Express session
+
 app.use(session({
   secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   cookie: {
+    path: '/',
     expires: 2592000000,
-    httpOnly: false
+    httpOnly: false,
+    encode:String,
   }
 }));
 
@@ -52,6 +59,15 @@ app.use(passport.initialize());
 
 // Persistent login sessions. Session expires after 6 months or when deleted by user.
 app.use(passport.session());
+
+// enable CORS so that browsers don't block requests.
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Credentials', true),
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
 
 app.use('/api/users', userRoutes);
 

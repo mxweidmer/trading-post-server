@@ -4,5 +4,5 @@ module.exports = {
     Person: require("./person"),
     //Category: require("./category"),
     Wishlist: require("./wishlist"),
-    User: require("./user")
+    //User: require("./user")
 };

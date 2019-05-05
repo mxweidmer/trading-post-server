@@ -9,12 +9,15 @@ module.exports = () => {
    // ========================================
 
    passport.serializeUser((user, cb) => {
+      console.log('serializeUser!!!!!!!!!!!! ------------------------\n\n\n')
+      console.log({user})
       cb(null, user.id);
    });
 
    passport.deserializeUser((id, cb) => {
-
-      db.User.findById(id, (err, user) => {
+      console.log('deserializeUser!!!!!!!!!!!! ------------------------\n\n\n')
+      console.log({id})
+      db.Person.findById(id, (err, user) => {
          if (err) { return cb(err); }
          cb(null, user);
       });
@@ -26,13 +29,13 @@ module.exports = () => {
    // ========================================
 
    passport.use("local-signup", new LocalStrategy({
-      usernameField: 'username',
+      usernameField: 'userName',
       passwordField: 'password',
       passReqToCallback: true
    },
-      (req, username, password, done) => {
-console.log("usernam: "+ username)
-         db.User.findOne({ username: username }, (err, user) => {
+      (req, userName, password, done) => {
+console.log("usernam: "+ userName)
+         db.Person.findOne({ userName: userName }, (err, user) => {
             if (err) {
                console.log("Error: ", err);
                return done(err);
@@ -45,12 +48,17 @@ console.log("usernam: "+ username)
 
             const hashedPassword = generateHash(req.body.password);
             const newUser = {
-               username: req.body.username,
+               firstName: req.body.firstName,
+               lastName: req.body.firstName,
+               userName: req.body.userName,
                password: hashedPassword,
-               email: req.body.email
+               email: req.body.email,
+               phone: req.body.phone,
+               city: req.body.city,
+               state: req.body.state,
                
             }
-            db.User.create(newUser)
+            db.Person.create(newUser)
                .then(function (dbUser) {
                   if (!dbUser) {
                      return done(null, false);
@@ -68,13 +76,13 @@ console.log("usernam: "+ username)
    // ========================================
 
    passport.use("local-login", new LocalStrategy({
-      usernameField: 'username',
+      usernameField: 'userName',
       passwordField: 'password',
       passReqToCallback: true
    },
-      (req, username, password, done) => {
+      (req, userName, password, done) => {
 
-         db.User.findOne({ username: username }, (err, user) => {   
+         db.Person.findOne({ userName: userName }, (err, user) => {   
             if (err) {
                console.log("Error: ", err);
                return done(err);
