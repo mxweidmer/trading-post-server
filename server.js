@@ -9,7 +9,7 @@ const session = require("express-session");
 const passport = require('passport');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const userRoutes = require("./routes/users.js");
 const categoriesRoutes = require("./routes/categories");
 const itemRoutes = require("./routes/items");
@@ -19,7 +19,7 @@ const authRoutes = require("./routes/auth");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(cors());
+// app.use(cors());
 //app.use(routes);
 
 /* app.get('/',function(req, res) {
