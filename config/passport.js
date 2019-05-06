@@ -56,7 +56,7 @@ console.log("username: "+ userName)
                phone: req.body.phone,
                city: req.body.city,
                state: req.body.state,
-               description: req.body.description
+               bio: req.body.bio
             }
             db.Person.create(newUser)
                .then(function (dbUser) {

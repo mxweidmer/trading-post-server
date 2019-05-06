@@ -56,7 +56,7 @@ const personSchema = Schema({
             "Password should be at least 6 characters long."
         ]
     },
-    description: {
+    bio: {
         type: String,
         trim: true
     },
