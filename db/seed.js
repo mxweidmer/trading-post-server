@@ -5,29 +5,34 @@ db.people.insert({"firstName": "Jane", "lastName":"Doe", "email":"janed@gmail.co
 
 //for the postman
 //to add a user
+
 /* {
-	"firtsName": "Jane",
+	"firstName": "Jane",
 	"lastName": "Doe",
 	"email": "jd@gmail.com",
-	"phone": "123456566",
+	"phone": "123456588",
 	"city": "Oakland",
 	"state": "CA",
-	"password":"123456",
-	"rating":0
-	
-} 
+	"password":"1233333",
+	"rating":0,
+	"userName": "spring222"
+
+}
+
 
 {
-    "firtsName": "John",
+    "firstName": "John",
 	"lastName": "Snow",
 	"email": "js@gmail.com",
 	"phone": "123456576",
 	"city": "San Francisco",
 	"state": "CA",
 	"password":"123459",
-	"rating":5
+    "rating":5,
+    "userName": "winteriscoming"
 }
-//to add an item
+
+/* to add an item
 {
 	"_owner": "5cc8da15ce98f8f39fccd613",
 	"title": "A ring",
@@ -54,9 +59,7 @@ db.people.insert({"firstName": "Jane", "lastName":"Doe", "email":"janed@gmail.co
 	"picture": "test",
 	"description": "big sturdy oak table",
 	"condition": "as new",
-	"category": "Furniture"
-
-	
+	"category": "Furniture"	
 }
 
-*/
+ */

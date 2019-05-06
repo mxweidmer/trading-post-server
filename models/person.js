@@ -37,9 +37,6 @@ const personSchema = Schema({
         trim: true,
         required: true
     },
-    awsid: {
-        type: String
-    },
     password: String,
     rating: {
         default: 0

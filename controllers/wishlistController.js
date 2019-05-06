@@ -28,6 +28,7 @@ module.exports = {
       });
     //.catch(err => res.send(err));
   },
+  //add an item to the wishlist
   addWishlistItemUser: function (req, res) {
     db.Person
       .findOneAndUpdate({ _id: req.params.userId }, { $push: { wishlist: req.params.itemId } })
