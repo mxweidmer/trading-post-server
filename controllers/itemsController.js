@@ -62,6 +62,7 @@ module.exports = {
             .then(dbModel => {
                 console.log("The item was deleted from the items of " + dbModel.name);
                 db.Item.remove({ _id: req.params.itemId }).then(() => console.log("Item deleted"))
+                res.json(dbModel)
             })
             .catch(err => {
                 console.log(err);
