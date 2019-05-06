@@ -16,7 +16,7 @@ const personSchema = Schema({
         type: String,
         trim: true,
         required: "Username is required.",
-    unique: true
+        unique: true
     },
     email: {
         type: String,
@@ -50,16 +50,16 @@ const personSchema = Schema({
         trim: true,
         required: "Password is required.",
         validate: [
-          function (input) {
-            return input.length >= 6;
-          },
-          "Password should be at least 6 characters long."
+            function (input) {
+                return input.length >= 6;
+            },
+            "Password should be at least 6 characters long."
         ]
-      },
-      bio: {
-          type: String,
-          trim: true,
-      },
+    },
+    description: {
+        type: String,
+        trim: true
+    },
     items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
     wishlist: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
 }, { timestamps: true });

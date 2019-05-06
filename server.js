@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 // Connect to Mongoose
 mongoose.Promise = Promise;
 mongoose.set("debug", true);
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tradingpost", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tradingposttest", { useNewUrlParser: true });
 
 // Cookie parser
 app.use(cookieParser());

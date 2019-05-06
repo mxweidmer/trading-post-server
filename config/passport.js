@@ -34,7 +34,7 @@ module.exports = () => {
       passReqToCallback: true
    },
       (req, userName, password, done) => {
-console.log("usernam: "+ userName)
+console.log("username: "+ userName)
          db.Person.findOne({ userName: userName }, (err, user) => {
             if (err) {
                console.log("Error: ", err);
@@ -56,7 +56,7 @@ console.log("usernam: "+ userName)
                phone: req.body.phone,
                city: req.body.city,
                state: req.body.state,
-               
+               description: req.body.description
             }
             db.Person.create(newUser)
                .then(function (dbUser) {
