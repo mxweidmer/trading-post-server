@@ -81,7 +81,9 @@ module.exports = {
                     condition: req.body.condition
                 }
             })
-            .then(() => console.log("yay"))
+            .then(db => {
+                res.json(db);
+            })
     },
     getSingleItem: function (req, res) {
         db.Item.findById({ _id: req.params.itemId }).then(dbModel => res.json(dbModel))
