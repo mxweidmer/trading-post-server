@@ -32,24 +32,24 @@ module.exports = {
         //     processData: false
         // }).then(imgur => {
 
-            db.Item
-                .create({
-                    _owner: req.body._owner,
-                    title: req.body.title,
-                    picture: req.body.picture,
-                    description: req.body.description,
-                    category: req.body.category,
-                    condition: req.body.condition
-                })
-                .then(dbModel => {
-                    db.Person.findOneAndUpdate({ _id: req.params.userId }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
+        db.Item
+            .create({
+                _owner: req.body._owner,
+                title: req.body.title,
+                picture: req.body.picture,
+                description: req.body.description,
+                category: req.body.category,
+                condition: req.body.condition
+            })
+            .then(dbModel => {
+                db.Person.findOneAndUpdate({ _id: req.params.userId }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
 
-                    res.status(201).json(dbModel);
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(422).json(err);
-                });
+                res.status(201).json(dbModel);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(422).json(err);
+            });
         // }).catch(error => {
         //     console.log(error);
         // })
@@ -61,13 +61,14 @@ module.exports = {
             .findOneAndUpdate({ _id: req.params.userId }, { $pull: { items: req.params.itemId } })
             .then(dbModel => {
                 console.log("The item was deleted from the items of " + dbModel.name);
+                db.Item.remove({ _id: req.params.itemId }).then(() => console.log("Item deleted"))
             })
             .catch(err => {
                 console.log(err);
                 res.status(422).json(err);
             });
 
-        db.Item.remove({ _id: req.params.itemId }).then(() => console.log("Item deleted"))
+
     },
     updateItem: function (req, res) {
         db.Item.findOneAndUpdate({ _id: req.params.itemId },
