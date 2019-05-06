@@ -1,4 +1,5 @@
 const db = require("../models");
+const axios = require("axios");
 
 // Defining methods for the itemsController
 module.exports = {
@@ -12,33 +13,75 @@ module.exports = {
         }
         db.Item
             .find({})
+            .limit(12)
             .sort({ createdAt: sort })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     //the method to add an item to the collection of items and add the corresponding item to the items of the specified user
     addItem: function (req, res) {
-        db.Item
-            .create(req.body)
-            .then(dbModel => {
-                db.Person.findOneAndUpdate({ _id: req.params.userId }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
 
-                res.status(201).json(dbModel);
+        // axios.post("https://api.imgur.com/3/upload", {
+        //     datatype: "multipart/form-data",
+        //     headers: {
+        //         "Authorization": "Client-ID 8bc6ab7f6927702"
+        //     },
+        //     data: req.body.picture,
+        //     cache: false,
+        //     contentType: false,
+        //     processData: false
+        // }).then(imgur => {
+
+            db.Item
+                .create({
+                    _owner: req.body._owner,
+                    title: req.body.title,
+                    picture: req.body.picture,
+                    description: req.body.description,
+                    category: req.body.category,
+                    condition: req.body.condition
+                })
+                .then(dbModel => {
+                    db.Person.findOneAndUpdate({ _id: req.params.userId }, { $push: { items: dbModel._id } }).then(dbModel => console.log(dbModel));
+
+                    res.status(201).json(dbModel);
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(422).json(err);
+                });
+        // }).catch(error => {
+        //     console.log(error);
+        // })
+
+
+    },
+    deleteItem: function (req, res) {
+        db.Person
+            .findOneAndUpdate({ _id: req.params.userId }, { $pull: { items: req.params.itemId } })
+            .then(dbModel => {
+                console.log("The item was deleted from the items of " + dbModel.name);
             })
             .catch(err => {
                 console.log(err);
                 res.status(422).json(err);
             });
-    },
-    //the method to delete an item based on its id
-    deleteItem: function (req, res) {
         db.Item.remove({ _id: req.params.itemId }).then(() => console.log("Item deleted"))
     },
     //the method to update an item based on its id
     updateItem: function (req, res) {
-        db.Item.findOneAndUpdate({ _id: req.params.itemId }, { $set: req.body }).then(() => console.log("yay"))
+        db.Item.findOneAndUpdate({ _id: req.params.itemId },
+            {
+                $set: {
+                    title: req.body.title,
+                    picture: req.body.picture,
+                    description: req.body.description,
+                    condition: req.body.condition
+                }
+            })
+            .then(() => console.log("yay"))
     },
     getSingleItem: function (req, res) {
-        db.Item.findById({ _id: req.params.id }).then(() => console.log("maybe"))
+        db.Item.findById({ _id: req.params.itemId }).then(dbModel => res.json(dbModel))
     }
 };
