@@ -49,7 +49,7 @@ console.log("username: "+ userName)
             const hashedPassword = generateHash(req.body.password);
             const newUser = {
                firstName: req.body.firstName,
-               lastName: req.body.firstName,
+               lastName: req.body.lastName,
                userName: req.body.userName,
                password: hashedPassword,
                email: req.body.email,
