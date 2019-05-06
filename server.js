@@ -19,7 +19,7 @@ const authRoutes = require("./routes/auth");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use(cors());
+app.use(cors());
 //app.use(routes);
 
 /* app.get('/',function(req, res) {
@@ -61,13 +61,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // enable CORS so that browsers don't block requests.
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://mxweidmer.github.io');
-  res.header('Access-Control-Allow-Credentials', true),
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'https://mxweidmer.github.io');
+//   res.header('Access-Control-Allow-Credentials', true),
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+//   next();
+// });
 
 app.use('/api/users', userRoutes);
 
